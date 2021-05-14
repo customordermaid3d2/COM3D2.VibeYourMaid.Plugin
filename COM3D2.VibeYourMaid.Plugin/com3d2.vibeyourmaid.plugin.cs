@@ -1431,6 +1431,9 @@ namespace CM3D2.VibeYourMaid.Plugin
                 majEnabled = true;
                 majItemClear = true;
                 majKupaEnabled = true;
+
+                faceUse = true;
+                dressUse = true;
             }
             public string[][] sFaceAnime20Vibe;
             public string[][] sFaceAnime30Vibe;
@@ -1523,6 +1526,9 @@ namespace CM3D2.VibeYourMaid.Plugin
             public bool majKupaEnabled;
             public bool uDatsuEnabled;
             public bool osawariEnabled;
+
+            public bool faceUse;
+            public bool dressUse;
         }
 
         private GameObject gameObject_ui;
@@ -3958,6 +3964,9 @@ namespace CM3D2.VibeYourMaid.Plugin
         //フェイスアニメ変更処理
         private void ChangeFaceAnime(int maidID)
         {
+            #region 얼굴 효과 사용 여부
+            if (!cfgw.faceUse) return;
+            #endregion
 
             Maid maid = stockMaids[maidID].mem;
             int iRandomFace = 0;
@@ -4014,6 +4023,9 @@ namespace CM3D2.VibeYourMaid.Plugin
         //フェイスブレンド変更処理
         private void ChangeFaceBlend(int maidID)
         {
+            #region 얼굴 효과 사용 여부
+            if (!cfgw.faceUse) return;
+            #endregion
 
             Maid maid = stockMaids[maidID].mem;
 
@@ -12013,6 +12025,8 @@ namespace CM3D2.VibeYourMaid.Plugin
                 //一列目
                 GUI.Label(new Rect(5, 35, 190, 20), "【各演出の有無】", gsLabel);
 
+                cfgw.faceUse = GUI.Toggle(new Rect(125, 35, 40, 20), cfgw.faceUse, "사용", gsToggle);
+
                 cfgw.HohoEnabled = GUI.Toggle(new Rect(5, 55, 55, 20), cfgw.HohoEnabled, "頬染め", gsToggle);
                 cfgw.NamidaEnabled = GUI.Toggle(new Rect(80, 55, 40, 20), cfgw.NamidaEnabled, "涙", gsToggle);
                 cfgw.aseAnimeEnabled = GUI.Toggle(new Rect(140, 55, 40, 20), cfgw.aseAnimeEnabled, "汗", gsToggle);
@@ -14476,6 +14490,7 @@ namespace CM3D2.VibeYourMaid.Plugin
                 if (cfgw.ntrBlock) GUI.Label(new Rect(580, y, 35, 20), "ON", gsLabel);
                 if (!cfgw.ntrBlock) GUI.Label(new Rect(580, y, 35, 20), "OFF", gsLabel);
 
+                cfgw.dressUse = GUI.Toggle(new Rect(580 + 40, y, 80, 20), cfgw.dressUse, "탈의효과", gsToggle);// 탈의 효과 사용
 
                 y = 30;
 
@@ -16144,8 +16159,8 @@ namespace CM3D2.VibeYourMaid.Plugin
                         MaidSetFace(life_f[i][7], stockMaids[mn[bgID][i]].mem);
                         stockMaids[mn[bgID][i]].mem.FaceBlend(life_f[i][8]);
 
-                        //着衣の変更
-                        if (life_f[i][10] == "0")
+                        //着衣の変更 착의 변경
+                        if (life_f[i][10] == "0" || !cfgw.dressUse)
                         { //全着衣
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.wear, true);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.mizugi, true);
@@ -16162,7 +16177,7 @@ namespace CM3D2.VibeYourMaid.Plugin
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.accKubi, true);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.accKubiwa, true);
                         }
-                        if (life_f[i][10] == "1")
+                        if (life_f[i][10] == "1" && cfgw.dressUse)
                         { //全裸
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.wear, false);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.mizugi, false);
@@ -16179,7 +16194,7 @@ namespace CM3D2.VibeYourMaid.Plugin
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.accKubi, false);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.accKubiwa, false);
                         }
-                        if (life_f[i][10] == "2")
+                        if (life_f[i][10] == "2" && cfgw.dressUse)
                         { //下着姿
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.wear, false);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.mizugi, true);
@@ -16196,7 +16211,7 @@ namespace CM3D2.VibeYourMaid.Plugin
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.accKubi, false);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.accKubiwa, false);
                         }
-                        if (life_f[i][10] == "3")
+                        if (life_f[i][10] == "3" && cfgw.dressUse)
                         { //ノーパンノーブラ
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.wear, true);
                             stockMaids[mn[bgID][i]].mem.body0.SetMask(TBody.SlotID.mizugi, false);
@@ -16454,7 +16469,7 @@ namespace CM3D2.VibeYourMaid.Plugin
                     }
 
 
-                    //表情変更処理
+                    //表情変更処理 표정 변경 처리
                     if (lifeTime3[i] <= 0)
                     {
                         //if((life_f[i][12] == "" && bgID != 32) || eldatui[i] == 0){

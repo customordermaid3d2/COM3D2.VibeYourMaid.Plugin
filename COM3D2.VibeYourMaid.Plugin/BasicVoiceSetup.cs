@@ -1212,6 +1212,33 @@ namespace CM3D2.VibeYourMaid.Plugin
 
         //改変終了---------------------------------------
 
+        public static string[][] reactionVoice = new string[][] { //性格追加時に更新
+          new string[] { "s0_01898.ogg" , "s0_01899.ogg" , "s0_01902.ogg" , "s0_01900.ogg" },
+          new string[] { "s1_03223.ogg" , "s1_03246.ogg" , "s1_03247.ogg" , "s1_03210.ogg" },
+          new string[] { "s2_01478.ogg" , "s2_01477.ogg" , "s2_01476.ogg" , "s2_01475.ogg" },
+          new string[] { "s3_02908.ogg" , "s3_02950.ogg" , "s3_02923.ogg" , "s3_02932.ogg" },
+          new string[] { "s4_08348.ogg" , "s4_08354.ogg" , "s4_08365.ogg" , "s4_08374.ogg" },
+          new string[] { "s5_04264.ogg" , "s5_04258.ogg" , "s5_04256.ogg" , "s5_04255.ogg" },
+          new string[] { "s6_01744.ogg" , "s6_02700.ogg" , "s6_02450.ogg" , "s6_02357.ogg" },
+          new string[] { "H0_00289.ogg" , "H0_00290.ogg" , "H0_00291.ogg" , "H0_00292.ogg" },
+          new string[] { "H1_11482.ogg" , "H1_13858.ogg" , "H1_13879.ogg" , "H1_13918.ogg" },
+          new string[] { "H2_06092.ogg" , "H2_00252.ogg" , "H2_00285.ogg" , "H2_00277.ogg" },
+          new string[] { "H3_00779.ogg" , "H3_00783.ogg" , "H3_00785.ogg" , "H3_00800.ogg" },
+          new string[] { "H4_01200.ogg" , "H4_01204.ogg" , "H4_01209.ogg" , "H4_01208.ogg" },
+          new string[] { "H5_00943.ogg" , "H5_00944.ogg" , "H5_00948.ogg" , "H5_00874.ogg" },
+          new string[] { "H6_00421.ogg" , "H6_00429.ogg" , "H6_00448.ogg" , "H6_00409.ogg" },
+          new string[] { "H7_03163.ogg" , "H7_03167.ogg" , "H7_03164.ogg" , "H7_03172.ogg" },
+          new string[] { "H8_08466.ogg" , "H8_01430.ogg" , "H8_01421.ogg" , "H8_01382.ogg" , "H8_01396.ogg" , "H8_01398.ogg" },
+          new string[] { "H9_00825.ogg" , "H9_00833.ogg" , "H9_00841.ogg" , "H9_00824.ogg" , "H9_00966.ogg" , "H9_00860.ogg" , "H9_00987.ogg" },
+          new string[] { "H10_04104.ogg" , "H10_04120.ogg" , "H10_04108.ogg" , "H10_04092.ogg" , "H10_04112.ogg" , "H10_04242.ogg" , "H10_04253.ogg" },
+          new string[] { "H11_00902.ogg" , "H11_00905.ogg" , "H11_00923.ogg" , "H11_00924.ogg" },
+          new string[] { "H12_01467.ogg" , "H12_01468.ogg" , "H12_01475.ogg" , "H12_01460.ogg" }
+        };
+
+
+
+
+
         public static void setup(BasicVoiceSet[] bvs)
         {
             bvs[0] = new BasicVoiceSet(sLoopVoice20PrideVibe, sLoopVoice20PrideFera, sLoopVoice30PrideVibe, sLoopVoice30PrideFera, sOrgasmVoice30PrideVibe, sOrgasmVoice30PrideFera, sLoopVoice40PrideVibe);

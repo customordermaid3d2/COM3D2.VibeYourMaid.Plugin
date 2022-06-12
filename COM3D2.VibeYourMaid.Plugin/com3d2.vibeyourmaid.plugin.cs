@@ -27,7 +27,7 @@ namespace CM3D2.VibeYourMaid.Plugin
       PluginFilter("COM3D2OHx64"),
       PluginFilter("COM3D2OHVRx64"),
       PluginName("VibeYourMaid"),
-      PluginVersion("2.0.5.2")]
+      PluginVersion("2.0.5.3")]
 
 
     public class VibeYourMaid : ExPluginBase
@@ -69,28 +69,6 @@ namespace CM3D2.VibeYourMaid.Plugin
           new string[]{ "Pride" , "Cool" , "Pure" , "Yandere" , "Anesan" , "Genki" , "Sadist" , "Muku" , "Majime" , "Rindere" , "Silent" , "Devilish" , "Ladylike" , "Secretary" , "Sister" , "Curtness" , "Missy" , "Childhood" , "Masochist" , "Crafty" }
         };
 
-        public string[][] reactionVoice = new string[][] { //性格追加時に更新
-          new string[] { "s0_01898.ogg" , "s0_01899.ogg" , "s0_01902.ogg" , "s0_01900.ogg" },
-          new string[] { "s1_03223.ogg" , "s1_03246.ogg" , "s1_03247.ogg" , "s1_03210.ogg" },
-          new string[] { "s2_01478.ogg" , "s2_01477.ogg" , "s2_01476.ogg" , "s2_01475.ogg" },
-          new string[] { "s3_02908.ogg" , "s3_02950.ogg" , "s3_02923.ogg" , "s3_02932.ogg" },
-          new string[] { "s4_08348.ogg" , "s4_08354.ogg" , "s4_08365.ogg" , "s4_08374.ogg" },
-          new string[] { "s5_04264.ogg" , "s5_04258.ogg" , "s5_04256.ogg" , "s5_04255.ogg" },
-          new string[] { "s6_01744.ogg" , "s6_02700.ogg" , "s6_02450.ogg" , "s6_02357.ogg" },
-          new string[] { "H0_00289.ogg" , "H0_00290.ogg" , "H0_00291.ogg" , "H0_00292.ogg" },
-          new string[] { "H1_11482.ogg" , "H1_13858.ogg" , "H1_13879.ogg" , "H1_13918.ogg" },
-          new string[] { "H2_06092.ogg" , "H2_00252.ogg" , "H2_00285.ogg" , "H2_00277.ogg" },
-          new string[] { "H3_00779.ogg" , "H3_00783.ogg" , "H3_00785.ogg" , "H3_00800.ogg" },
-          new string[] { "H4_01200.ogg" , "H4_01204.ogg" , "H4_01209.ogg" , "H4_01208.ogg" },
-          new string[] { "H5_00943.ogg" , "H5_00944.ogg" , "H5_00948.ogg" , "H5_00874.ogg" },
-          new string[] { "H6_00421.ogg" , "H6_00429.ogg" , "H6_00448.ogg" , "H6_00409.ogg" },
-          new string[] { "H7_03163.ogg" , "H7_03167.ogg" , "H7_03164.ogg" , "H7_03172.ogg" },
-          new string[] { "H8_08466.ogg" , "H8_01430.ogg" , "H8_01421.ogg" , "H8_01382.ogg" , "H8_01396.ogg" , "H8_01398.ogg" },
-          new string[] { "H9_00825.ogg" , "H9_00833.ogg" , "H9_00841.ogg" , "H9_00824.ogg" , "H9_00966.ogg" , "H9_00860.ogg" , "H9_00987.ogg" },
-          new string[] { "H10_04104.ogg" , "H10_04120.ogg" , "H10_04108.ogg" , "H10_04092.ogg" , "H10_04112.ogg" , "H10_04242.ogg" , "H10_04253.ogg" },
-          new string[] { "H11_00902.ogg" , "H11_00905.ogg" , "H11_00923.ogg" , "H11_00924.ogg" },
-          new string[] { "H12_01467.ogg" , "H12_01468.ogg" , "H12_01475.ogg" , "H12_01460.ogg" }
-        };
 
 
         //SE切替関連
@@ -231,10 +209,7 @@ namespace CM3D2.VibeYourMaid.Plugin
         }
         //--------------------------------------------
 
-
-
-
-
+        /*
         public void Start()
         {
 
@@ -244,7 +219,7 @@ namespace CM3D2.VibeYourMaid.Plugin
         {
 
         }
-
+        */
 
         //--------------------------------------------
         //シーン開始時の処理--------------------------
@@ -818,505 +793,7 @@ namespace CM3D2.VibeYourMaid.Plugin
         public int tgIDBack = -1;
         public int maidCount = 0;
 
-        public class MaidInfo
-        {
-            public MaidInfo(Maid m, int n, string fn, string ln, string ps, string con)
-            {
-                mem = m;
-                id = n;
-                fName = fn;
-                lName = ln;
-                personal = ps;
-                contract = con;
-            }
 
-            public Maid mem = null;
-            public int id = 0;
-            public string fName = "";
-            public string lName = "";
-            public string personal = ""; //性格
-            public string contract = ""; //契約
-        }
-
-        public class MaidState
-        {
-
-            public MaidState()
-            {
-                maidHead = null;
-                maidMune = null;
-                maidHara = null;
-                maidXxx = null;
-                vStateMajor = 10;
-                vStateMajorOld = 10;
-                vLevel = 0;
-                linkEnabled = false;
-                linkID = -1;
-                visibleBack = false;
-                sVibeFlag = false;
-                voiceMode = 0;
-                voiceMode2 = 0;
-                pAutoSelect = 0;
-                pAutoTime = 0f;
-                eAutoSelect = false;
-                eAutoTime = 0f;
-                mAutoTimeL = 0f;
-                mAutoTimeS = 0f;
-                iRandomVoiceBackup = 0;
-                voiceHoldTime = 0f;
-                faceHoldTime = 0f;
-                yoinHoldTime = 0f;
-                stateAltTime1 = 0;
-                stateAltTime2 = 0;
-                faceAnimeBackup = "";
-                faceBlendBackup = "";
-                sekimenValue = 0f;
-                kaikanLevel = 0;
-                editVoiceSetName = "";
-                editVoiceSet = new List<string[]>();
-                vsTime = 0f;
-                vsFlag = 0;
-                vsInterval = 1000f;
-                aheValue = 0;
-                aheValue2 = 0;
-                fAheDefEyeL = -9999f;
-                fAheDefEyeR = -9999f;
-                aheResetFlag = false;
-                exciteLevel = 1;
-                exciteValue = 0f;
-                resistBase = 10f;
-                resistBonus = 0f;
-                resistValue = 0f;
-                boostBase = 0.5f;
-                boostBonus = 0f;
-                boostValue = 0f;
-                jirashi = 0f;
-                maidStamina = 3000f;
-                stunFlag = false;
-                orgasmValue = 0f;
-                orgasmCount = 0;
-                orgasmCmb = 0;
-                orgasmHoldTime = 0f;
-                orgasmVoice = 0;
-                orgasmStart = false;
-                continuationTime = 0f;
-                bIsBlowjobing = 0;
-                zAnimeFileName = "";
-                motionHoldTime = 0f;
-                motionAltTime = 0;
-                mcFlag = -1;
-                maidMotionBackup = "";
-                motionID = -1;
-                baceMotion = "";
-                inMotion = "Non";
-                outMotion = "Non";
-                syaseiMotion = "Non";
-                analMotion = "Non";
-                motionSissinMove = "Non";
-                motionSissinTaiki = "Non";
-                senyouTokusyuMotion = new List<string>();
-                analMode = false;
-                majHiBack = 0f;
-                majFwBack = 0f;
-                majRollBack = 0f;
-                majMaidRollBack = 0;
-                majManRollBack = 0;
-                syaseiMarks = new int[] { 0, 0, 0, 0, 0 };
-                giveSexual = new bool[] { false, false, false, false, false, false, false, false, false, false };
-                elItazuraFlag = false;
-                editMotionSetName = "";
-                editMotionSet = new List<List<string>>();
-                msTime1 = 0f;
-                msTime2 = 0f;
-                msCategory = 0;
-                mOnceFlag = false;
-                mOnceBack = "";
-                bokkiValue1 = 0f;
-                cliMode = 0;
-                uDatsu = 0;
-                bokkiResetFlag = false;
-                labiaValue = 0;
-                pikuFlag = false;
-                pikuTime = 0;
-                pikuTime2 = 0;
-                hibuValue = 0;
-                analValue = 0;
-                uDatsuValue1 = 0;
-                uDatsuValue2 = 0;
-                uDatsuStock = 0;
-                uDatsuWait = 90f;
-                hibuSlider1Value = 10f;
-                analSlider1Value = 10f;
-                hibuSlider2Value = 3f;
-                analSlider2Value = 3f;
-                gakupikuResetFlag = false;
-                gakupikuTime = 0;
-                gakupikuFlag = true;
-                gakupikuOn = false;
-                gakupikuValue = 0f;
-                chinpoValue1 = 0f;
-                soriValue1 = 0f;
-                aseResetFlag = false;
-                aseTime = 0f;
-                cameraCheck = false;
-                eyeToCamOld = false;
-                headToCamOld = false;
-                MouthHoldTime = 0f;
-                MouthMode = 0;
-                OldMode = 0;
-                MaValue = 0f;
-                MiValue = 0f;
-                MdwValue = 0f;
-                TupValue = 0f;
-                ToutValue = 0f;
-                TopenValue = 0f;
-                TupValue2 = 0.3f;
-                ToutValue2 = 0.3f;
-                TopenValue2 = 0.4f;
-                maVBack = 1f;
-                miVBack = 1f;
-                mdwVBack = 1f;
-                fToiki1 = false;
-                fToiki2 = false;
-                fAieki1 = false;
-                fAieki2 = false;
-                fAieki3 = false;
-                fSio = false;
-                fSio2 = false;
-                sioTime = 0f;
-                sioTime2 = 0f;
-                sioVolume = 0f;
-                nyoVolume = 0f;
-                kupaWaveValue = 0f;
-                kupaWaveRe = 1f;
-                shapeKeyWaveValue = 0f;
-                shapeKeyWaveRe = 1f;
-                shapeKeyIncreaseValue = 0f;
-                shapeKeyRandomInterval = 0.01f;
-                shapeKeyRandomDelta = 0f;
-                itemV = "";
-                itemA = "";
-                cliHidai = 0f;
-                chikubiHidai = 0.2f;
-                orgTotal = 0;
-                orgMax = 0;
-                orgTotalChitsu = 0;
-                orgTotalAnal = 0;
-                orgTotalEtc = 0;
-                syaseiTotal1 = new int[] { 0, 0, 0, 0 };
-                syaseiTotal2 = new float[] { 0f, 0f, 0f, 0f };
-                sioTotal1 = 0;
-                nyoTotal1 = 0;
-                sioTotal2 = 0f;
-                nyoTotal2 = 0f;
-                stanTotal = 0;
-                uDatsuTotal = 0;
-                bodyName = "";
-                targetSphere_mouth = null;
-                targetSphere_muneR = null;
-                targetSphere_muneL = null;
-                targetSphere_vagina = null;
-                targetSphere_hipL = null;
-                targetSphere_hipR = null;
-                targetSphere_anal = null;
-                IK_mouth = null;
-                IK_muneR = null;
-                IK_muneL = null;
-                IK_vagina = null;
-                IK_hipL = null;
-                Hip_L = null;
-                IK_hipR = null;
-                Hip_R = null;
-                IK_anal = null;
-                chikubi_View = -1;
-                chikubiEnabled = false;
-                chikubiBokkiEnabled = true;
-                tits_chikubi_def = new float[] { 0f, 0f };
-                tits_chikubi_perky = new float[] { 0f, 0f };
-                tits_chikubi_cow = new float[] { 0f, 0f };
-                tits_chikubi_observe = new float[] { 0f, 0f };
-                tits_chikubi_wide = new float[] { 0f, 0f };
-                tits_chikubi_ultralong = new float[] { 0f, 0f };
-                tits_chikubi_ultrawide = new float[] { 0f, 0f };
-                tits_chikubi_ultratare = new float[] { 0f, 0f };
-                tits_chikubi_kanbotsu_n = new float[] { 0f, 0f };
-                tits_chikubi_kanbotsu_s = new float[] { 0f, 0f };
-                tits_chikubi_kanbotsu_p = new float[] { 0f, 0f };
-                tits_nipple_def = new float[] { 0f, 0f };
-                tits_nipple_perky1 = new float[] { 0f, 0f };
-                tits_nipple_perky2 = new float[] { 0f, 0f };
-                tits_nipple_long1 = new float[] { 0f, 0f };
-                tits_nipple_long2 = new float[] { 0f, 0f };
-                tits_nipple_wide = new float[] { 0f, 0f };
-                tits_nipple_puffy = new float[] { 0f, 0f };
-                tits_nipple_kupa = new float[] { 0f, 0f };
-                tits_munel_chippai = new float[] { 0f, 0f };
-            }
-
-            public Transform maidHead = null;  //メイドの頭位置取得用
-            public Transform maidMune = null;  //メイドの胸位置取得用
-            public Transform maidHara = null;  //メイドの股間位置取得用
-            public Transform maidXxx = null;  //メイドの股間位置取得用
-
-            public int vStateMajor = 10;        //強弱によるステート
-            public int vStateMajorOld = 10;     //強弱によるステート（前回値）
-            public int vLevel = 0;                //バイブ状態
-            public bool linkEnabled = false;  //メインメイドとリンクさせるかどうか
-            public int linkID = -1;  //リンクメイドのID
-            public bool visibleBack = false;  //メイドがもともと表示されていたかのチェック
-
-            public bool sVibeFlag = false;
-
-            //ボイスモードのセレクト用
-            public int voiceMode = 0;
-            public int voiceMode2 = 0;
-            public bool autoVoiceEnabled = true;
-            public int iRandomVoiceBackup = 0;
-
-            //オートモード用
-            public int pAutoSelect = 0;
-            public float pAutoTime = 0f;  //責めのオート変更時間
-            public bool eAutoSelect = false;
-            public float eAutoTime = 0f;  //目線のオート変更時間
-            public float mAutoTimeL = 0f;  //大カテゴリモーションのオート変更時間
-            public float mAutoTimeS = 0f;  //小カテゴリモーションのオート変更時間
-
-            //表情・音声管理
-            public float voiceHoldTime;
-            public float faceHoldTime;
-            public float yoinHoldTime;
-            public int stateAltTime1;
-            public int stateAltTime2;
-            public string faceAnimeBackup = "";
-            public string faceBlendBackup = "";
-            public float sekimenValue = 0f;
-            public int kaikanLevel;
-
-            //ボイスセット用
-            public string editVoiceSetName = "";
-            public List<string[]> editVoiceSet = new List<string[]>();
-            public float vsTime = 0f;
-            public int vsFlag = 0;
-            public float vsInterval = 1000f;
-
-            //瞳操作関連
-            public float aheValue = 0f;
-            public float aheValue2 = 0f;
-            public float fAheDefEyeL = -9999f;
-            public float fAheDefEyeR = -9999f;
-            public bool aheResetFlag = false;
-
-
-            //興奮度管理
-            public int exciteLevel = 1;            //0～300の興奮度を、1～4の興奮レベルに変換した値
-            public float exciteValue = 0f;       //現在興奮値
-
-            public float resistBase = 0f;          //抵抗値のベース値
-            public float resistBonus = 0f;          //抵抗の特別加算値
-            public float resistValue = 0f;          //現在抵抗値
-
-            public float boostBase = 0.5f;            //感度のベース値
-            public float boostBonus = 0f;           //感度の特別加算値
-            public float boostValue = 0f;           //現在感度
-            public float jirashi = 0;            //焦らし度
-
-            public float maidStamina = 3000f;        //スタミナ
-            public bool stunFlag = false;
-
-            public float orgasmValue = 0f;            //現在絶頂値　100になると絶頂
-            public int orgasmCount = 0;               //絶頂回数
-            public int orgasmCmb = 0;                 //連続絶頂回数
-            public float orgasmHoldTime = 0f;          //絶頂後のボーナスタイム
-            public int orgasmVoice = 0;               //絶頂時音声フラグ
-            public bool orgasmStart = false;          //絶頂開始フラグ
-            public float continuationTime;             //バイブ責めの継続時間
-
-            //フェラ状態チェック
-            public int bIsBlowjobing = 0;
-            public string zAnimeFileName = "";
-
-            //モーション変更関連
-            public float motionHoldTime = 0f;
-            public int motionAltTime = 0;
-            public int mcFlag = -1;
-            public string maidMotionBackup = "";
-            public int motionID = -1;
-            public string baceMotion = "";
-            public string inMotion = "Non";
-            public string outMotion = "Non";
-            public string syaseiMotion = "Non";
-            public string analMotion = "Non";
-            public string motionSissinMove = "Non";
-            public string motionSissinTaiki = "Non";
-            public List<string> senyouTokusyuMotion = new List<string>();
-            public bool analMode = false;
-            public float majHiBack = 0f;
-            public float majFwBack = 0f;
-            public float majRollBack = 0f;
-            public int majMaidRollBack = 0;
-            public int majManRollBack = 0;
-            public int[] syaseiMarks = new int[] { 0, 0, 0, 0, 0 };
-            public bool[] giveSexual = new bool[] { false, false, false, false, false, false, false, false, false, false };
-            public bool elItazuraFlag = false;
-
-            //モーションセット関連
-            public string editMotionSetName = "";
-            public List<List<string>> editMotionSet = new List<List<string>>();
-            public float msTime1 = 0f;
-            public float msTime2 = 0f;
-            public int msCategory = 0;
-            public bool mOnceFlag = false;
-            public string mOnceBack = "";
-
-            //秘部操作関連
-            public float bokkiValue1 = 0f;              //　クリ勃起値
-            public int cliMode = 0;                     //クリモード(1:通常、2:巨クリ、3:ふたなり)
-            public int uDatsu = 0;  //子宮脱フラグ
-            public bool bokkiResetFlag = false;
-            public float labiaValue = 0;
-            public bool pikuFlag = false;
-            public float pikuTime = 0;
-            public float pikuTime2 = 0;
-            public float hibuValue = 0;
-            public float analValue = 0;
-            public float uDatsuValue1 = 0;
-            public float uDatsuValue2 = 0;
-            public float uDatsuStock = 0;
-            public float uDatsuWait = 90f;
-            public float hibuSlider1Value = 12f;
-            public float analSlider1Value = 12f;
-            public float hibuSlider2Value = 3f;
-            public float analSlider2Value = 3f;
-
-            //痙攣関係
-            public bool gakupikuResetFlag = false;
-            public float gakupikuTime = 0;                          //痙攣時間判定
-            public bool gakupikuFlag = true;                        //痙攣動作フラグ
-            public bool gakupikuOn = false;
-            public float gakupikuValue = 0f;
-
-            //ちんぽ操作関連
-            public float chinpoValue1 = 0f;              //　ちんぽ勃起値
-            public float soriValue1 = 0f;                //　ちんぽ反り値
-
-            //汗関連
-            public bool aseResetFlag = false;
-            public float aseTime = 0f;
-
-            //カメラが顔に近づいているかどうか
-            public bool cameraCheck = false;
-            public bool eyeToCamOld = false;
-            public bool headToCamOld = false;
-
-            //メイドの口元変更
-            public float MouthHoldTime = 0f;
-            public int MouthMode = 0;
-            public int OldMode = 0;
-            public float MaValue = 0f;
-            public float MiValue = 0f;
-            public float MdwValue = 0f;
-            public float TupValue = 0f;
-            public float ToutValue = 0f;
-            public float TopenValue = 0f;
-            public float TupValue2 = 0.3f;
-            public float ToutValue2 = 0.3f;
-            public float TopenValue2 = 0.4f;
-            public float maVBack = 1f;
-            public float miVBack = 1f;
-            public float mdwVBack = 1f;
-
-            //演出関係
-            public bool fToiki1 = false;
-            public bool fToiki2 = false;
-            public bool fAieki1 = false;
-            public bool fAieki2 = false;
-            public bool fAieki3 = false;
-            public bool fSio = false;
-            public bool fSio2 = false;
-            public float sioTime = 0f;
-            public float sioTime2 = 0f;
-            public float sioVolume = 0f;
-            public float nyoVolume = 0f;
-
-            //シェイプキー関連
-            public float kupaWaveValue = 0f;
-            public float kupaWaveRe = 1f;
-            public float shapeKeyWaveValue = 0f;
-            public float shapeKeyWaveRe = 1f;
-            public float shapeKeyIncreaseValue = 0f;
-            public float shapeKeyRandomInterval = 0.01f; // 動作間隔(秒)
-            public float shapeKeyRandomDelta = 0f;       // 前回動作からの経過時間
-
-            //アイテム関連
-            public string itemV = "";
-            public string itemA = "";
-
-            //エロステータス・経験値関連
-            public float cliHidai = 0f; //クリトリス肥大度
-            public float chikubiHidai = 0.2f; //乳首肥大度
-
-            public int orgTotal = 0; //トータル絶頂数
-            public int orgMax = 0; //最大連続絶頂数
-
-            public int orgTotalChitsu = 0; //トータル絶頂数（膣）
-            public int orgTotalAnal = 0; //トータル絶頂数（アナル）
-            public int orgTotalEtc = 0; //トータル絶頂数（その他）
-
-            public int[] syaseiTotal1 = new int[] { 0, 0, 0, 0 }; //射精回数（膣、アナル、口、外）
-            public float[] syaseiTotal2 = new float[] { 0f, 0f, 0f, 0f }; //射精量（膣、アナル、口、外）
-
-            public int sioTotal1 = 0; //潮吹き回数
-            public int nyoTotal1 = 0; //放尿回数
-            public float sioTotal2 = 0f; //潮吹き量
-            public float nyoTotal2 = 0f; //放尿量
-
-            public int stanTotal = 0; //失神回数
-            public int uDatsuTotal = 0; //子宮脱回数
-
-            //お触り関連
-            public string bodyName = "";
-            public GameObject targetSphere_mouth = null;
-            public GameObject targetSphere_muneR = null;
-            public GameObject targetSphere_muneL = null;
-            public GameObject targetSphere_vagina = null;
-            public GameObject targetSphere_hipL = null;
-            public GameObject targetSphere_hipR = null;
-            public GameObject targetSphere_anal = null;
-            public Transform IK_mouth = null;
-            public Transform IK_muneR = null;
-            public Transform IK_muneL = null;
-            public Transform IK_vagina = null;
-            public Transform IK_hipL = null;
-            public Transform Hip_L = null;
-            public Transform IK_hipR = null;
-            public Transform Hip_R = null;
-            public Transform IK_anal = null;
-
-            //乳首関連
-            public int chikubi_View = -1;
-            public bool chikubiEnabled = false;
-            public bool chikubiBokkiEnabled = true;
-            public float[] tits_chikubi_def = new float[] { 0f, 0f };  //デフォルト乳首と同じような形。先端だけ。
-            public float[] tits_chikubi_perky = new float[] { 0f, 0f };  //乳首が少し長くなる。ツンツン乳首
-            public float[] tits_chikubi_cow = new float[] { 0f, 0f };  //乳首が伸びる、うしちちっぽく。
-            public float[] tits_chikubi_observe = new float[] { 0f, 0f };  //乳首周囲がへこむ。服と胸との隙間を作るキー。
-            public float[] tits_chikubi_wide = new float[] { 0f, 0f };  //乳首が少し広がる。
-            public float[] tits_chikubi_ultralong = new float[] { 0f, 0f };  //乳首がすごく長くなるキー。
-            public float[] tits_chikubi_ultrawide = new float[] { 0f, 0f };  //乳首がすごく膨らむキー。
-            public float[] tits_chikubi_ultratare = new float[] { 0f, 0f };  //乳首がすごく垂れるキー。
-            public float[] tits_chikubi_kanbotsu_n = new float[] { 0f, 0f };  //陥没乳首ノーマル。
-            public float[] tits_chikubi_kanbotsu_s = new float[] { 0f, 0f };  //陥没乳首、少し。
-            public float[] tits_chikubi_kanbotsu_p = new float[] { 0f, 0f };  //陥没乳首、ポンカン型、perkyキーですこし乳首が伸ばせるタイプ。
-            public float[] tits_nipple_def = new float[] { 0f, 0f };  //デフォルト乳首と同じような形を再現するキー。乳輪あたりも。
-            public float[] tits_nipple_perky1 = new float[] { 0f, 0f };  //ツンツン乳輪、乳首も少し出ます。
-            public float[] tits_nipple_perky2 = new float[] { 0f, 0f };  //ツンツン乳輪、乳首は出ないタイプ。
-            public float[] tits_nipple_long1 = new float[] { 0f, 0f };  //乳首周辺が伸びる。
-            public float[] tits_nipple_long2 = new float[] { 0f, 0f };  //乳首周辺が伸びる2。
-            public float[] tits_nipple_wide = new float[] { 0f, 0f };  //乳輪が広がる。
-            public float[] tits_nipple_puffy = new float[] { 0f, 0f };  //ぷっくり乳首。
-            public float[] tits_nipple_kupa = new float[] { 0f, 0f };  //乳首くぱ。
-            public float[] tits_munel_chippai = new float[] { 0f, 0f };  //ちっぱい
-        }
 
 
         //メイドデータをストック
@@ -2887,7 +2364,7 @@ namespace CM3D2.VibeYourMaid.Plugin
             Maid maid = stockMaids[maidID].mem;
             int iPersonal = Array.IndexOf(personalList[1], stockMaids[maidID].personal);
             if (maidsState[maidID].voiceMode2 > 0) iPersonal = maidsState[maidID].voiceMode2 - 1;
-            string[] VoiceList = reactionVoice[iPersonal];
+            string[] VoiceList = BasicVoiceSetup.reactionVoice[iPersonal];
             int iRandom = UnityEngine.Random.Range(0, VoiceList.Length);
 
             maid.AudioMan.LoadPlay(VoiceList[iRandom], 0f, false, false);
@@ -3461,65 +2938,6 @@ namespace CM3D2.VibeYourMaid.Plugin
         private float[] prefabAdjust = new float[] { 0f, 0f, 0f, 0f, 0.0011f, 0f, 0f, 0f, 0.0008f, 0.00105f, 0.00105f, 0.00185f };
 
         public MotionAdjust maj = new MotionAdjust();
-        public class MotionAdjust
-        {
-            public MotionAdjust()
-            {
-                motionName = new List<string>();
-                baceMotion = new List<string>();
-                basicHeight = new List<float>();
-                basicRoll = new List<float>();
-                maidRoll = new List<int>();
-                manRoll = new List<int>();
-                rollSettei = new List<int>();
-                basicForward = new List<float>();
-                mansHeight = new List<float>();
-                mansForward = new List<float>();
-                mansRight = new List<float>();
-                hkupa1 = new List<float>();
-                akupa1 = new List<float>();
-                hkupa2 = new List<float>();
-                akupa2 = new List<float>();
-                mVoiceSet = new List<string>();
-                iTargetLH = new List<int>();
-                iTargetRH = new List<int>();
-                syaseiMarks = new List<int[]>();
-                giveSexual = new List<bool[]>();
-                itemSet = new List<bool[]>();
-                prefabSet = new List<int>();
-                analEnabled = new List<bool>();
-                analHeight = new List<float>();
-                analForward = new List<float>();
-                analRight = new List<float>();
-            }
-
-            public List<string> motionName;
-            public List<string> baceMotion;
-            public List<float> basicHeight;
-            public List<float> basicRoll;
-            public List<int> maidRoll;
-            public List<int> manRoll;
-            public List<int> rollSettei;
-            public List<float> basicForward;
-            public List<float> mansHeight;
-            public List<float> mansForward;
-            public List<float> mansRight;
-            public List<float> hkupa1;
-            public List<float> akupa1;
-            public List<float> hkupa2;
-            public List<float> akupa2;
-            public List<string> mVoiceSet;
-            public List<int> iTargetLH;
-            public List<int> iTargetRH;
-            public List<int[]> syaseiMarks;
-            public List<bool[]> giveSexual;
-            public List<bool[]> itemSet;
-            public List<int> prefabSet;
-            public List<bool> analEnabled;
-            public List<float> analHeight;
-            public List<float> analForward;
-            public List<float> analRight;
-        }
 
         private bool[] GiveSexualSet(string motion)
         {
@@ -5541,330 +4959,11 @@ namespace CM3D2.VibeYourMaid.Plugin
         }
 
 
-        public class SeiekiInfo
-        {
-
-            private String slotName;
-            private int matNo;
-            private int layer;
-            private String res;
-            private int minX;
-            private int maxX;
-            private int minY;
-            private int maxY;
-            private float minRot;
-            private float maxRot;
-            private float minScale;
-            private float maxScale;
-
-            public SeiekiInfo(String slotName, int matNo, int layer, String res, int minX, int maxX, int minY, int maxY, float minRot, float maxRot, float minScale, float maxScale)
-            {
-                this.slotName = slotName;
-                this.matNo = matNo;
-                this.layer = layer;
-                this.res = res;
-                this.minX = minX;
-                this.maxX = maxX;
-                this.minY = minY;
-                this.maxY = maxY;
-                this.minRot = minRot;
-                this.maxRot = maxRot;
-                this.minScale = minScale;
-                this.maxScale = maxScale;
-            }
-
-
-            public String SlotName
-            {
-                get { return this.slotName; }
-            }
-            public int MatNo
-            {
-                get { return this.matNo; }
-            }
-            public int Layer
-            {
-                get { return this.layer; }
-            }
-            public String Res
-            {
-                get { return this.res; }
-            }
-
-            public String GetFilName()
-            {
-                string[] strArray = this.res.Split(':');
-                return "res:" + strArray[UnityEngine.Random.Range(0, strArray.Length)];
-            }
-
-            public int MinX
-            {
-                get { return this.minX; }
-            }
-
-            public int MaxX
-            {
-                get { return this.maxX; }
-            }
-
-            public int GetX()
-            {
-                return UnityEngine.Random.Range(this.minX, this.maxX);
-            }
-
-            public int MinY
-            {
-                get { return this.minY; }
-            }
-
-            public int MaxY
-            {
-                get { return this.maxY; }
-            }
-
-            public int GetY()
-            {
-                return (int)UnityEngine.Random.Range(this.minY, this.maxY);
-            }
-
-            public float MinRot
-            {
-                get { return this.minRot; }
-            }
-
-            public float MaxRot
-            {
-                get { return this.maxRot; }
-            }
-
-            public float GetRot()
-            {
-                return UnityEngine.Random.Range(this.minRot, this.maxRot);
-            }
-
-            public float MinScale
-            {
-                get { return this.minScale; }
-            }
-
-            public float MaxScale
-            {
-                get { return this.maxScale; }
-            }
-
-            public float GetScale()
-            {
-                return UnityEngine.Random.Range(this.minScale, this.maxScale);
-            }
-        }
-
-        private static readonly List<SeiekiInfo> KaoMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003", 378, 452, 628, 820, 330, 360, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r", 572, 646, 628, 820, 0, 30, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe004:Seieki/spe005", 429, 593, 575, 672, 340, 380, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe006:Seieki/spe007", 452, 572, 414, 566, 340, 380, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001:Seieki/spe001r:Seieki/spe002:Seieki/spe002R:Seieki/spe004", 469, 558, 706, 864, 340, 380, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003", 378, 452, 628, 820, 315, 405, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r", 572, 646, 628, 820, 315, 405, 1.5f, 1.5f),
-        };
-
-        private static readonly List<SeiekiInfo> MuneMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009", 412, 449, 428, 470, 10, 20, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009", 397, 404, 444, 487, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r", 455, 492, 428, 470, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009", 532, 569, 428, 470, 10, 20, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r", 575, 612, 428, 470, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009", 620, 627, 444, 487, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005:Seieki/spe008:Seieki/spe008r:Seieki/spe010:Seieki/spe012:Seieki/spe012r", 509, 515, 420, 479, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe011:Seieki/spe014", 415, 443, 492, 517, 350, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe011r:Seieki/spe014r", 461, 500, 492, 517, 0, 10, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe011:Seieki/spe014", 524, 563, 492, 517, 350, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe011r:Seieki/spe014r", 581, 609, 492, 517, 0, 10, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009", 412, 449, 428, 470, 10, 20, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r", 455, 492, 428, 470, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009", 532, 569, 428, 470, 10, 20, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r", 575, 612, 428, 470, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005:Seieki/spe008:Seieki/spe008r:Seieki/spe010:Seieki/spe012:Seieki/spe012r", 509, 515, 420, 479, 350, 370, 0.5f, 0.5f),
-        };
-
-        private static readonly List<SeiekiInfo> KuchimotoMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001:Seieki/spe008:Seieki/spe009", 438, 483, 742, 857, 350, 360, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001:Seieki/spe008:Seieki/spe009", 398, 442, 768, 876, 350, 360, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001r:Seieki/spe008r:Seieki/spe009r", 541, 586, 742, 857, 0, 10, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe001r:Seieki/spe008r:Seieki/spe009r", 582, 626, 768, 876, 0, 10, 1.5f, 1.5f),
-            new SeiekiInfo("head", 5, 18, "Seieki/spe006:Seieki/spe007", 473, 550, 826, 861, 0, 0, 1.5f, 1.5f),
-        };
-
-        private static readonly List<SeiekiInfo> SenakaMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 424, 479, 183, 236, 170, 210, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 414, 469, 256, 314, 170, 210, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 483, 503, 248, 318, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 429, 458, 77, 169, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 470, 499, 77, 169, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 521, 541, 248, 318, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 555, 610, 256, 314, 150, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 545, 600, 183, 236, 150, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 525, 554, 77, 169, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 566, 595, 77, 169, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe004r:Seieki/spe013:Seieki/spe013r:Seieki/spe014:Seieki/spe014r", 498, 525, 174, 241, 180, 180, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 483, 503, 248, 318, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 521, 541, 248, 318, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe004r:Seieki/spe013:Seieki/spe013r:Seieki/spe014:Seieki/spe014r", 498, 525, 174, 241, 180, 180, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 470, 499, 77, 169, 170, 190, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 525, 554, 77, 169, 170, 190, 0.7f, 0.7f),
-        };
-
-        private static readonly List<SeiekiInfo> SiriMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005:Seieki/spe010:Seieki/spe012:Seieki/spe013", 229, 240, 870, 877, 325, 345, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005r:Seieki/spe010r:Seieki/spe012:Seieki/spe013:Seieki/spe014", 215, 243, 836, 847, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe005r:Seieki/spe010r:Seieki/spe012r:Seieki/spe013r:Seieki/spe014r", 257, 285, 828, 839, 330, 360, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 218, 254, 778, 823, 330, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe007r:Seieki/spe013r:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015", 232, 258, 760, 768, 330, 360, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe005r:Seieki/spe010r:Seieki/spe012r:Seieki/spe013r", 784, 795, 870, 877, 15, 35, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe005:Seieki/spe010:Seieki/spe012r:Seieki/spe013r:Seieki/spe014r", 781, 809, 836, 847, 360, 330, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005:Seieki/spe010:Seieki/spe012:Seieki/spe013:Seieki/spe014", 739, 767, 828, 839, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014r", 733, 769, 778, 817, 0, 30, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe007:Seieki/spe013:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015", 766, 792, 760, 768, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 255, 291, 778, 817, 330, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014r", 771, 806, 778, 823, 0, 30, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 263, 275, 850, 860, 330, 360, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014r", 749, 761, 850, 860, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005r:Seieki/spe010r:Seieki/spe012:Seieki/spe013:Seieki/spe014", 215, 243, 836, 847, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe005r:Seieki/spe010r:Seieki/spe012r:Seieki/spe013r:Seieki/spe014r", 257, 285, 828, 839, 330, 360, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 218, 254, 778, 823, 330, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe007r:Seieki/spe013r:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015", 232, 258, 760, 768, 330, 360, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004r:Seieki/spe005:Seieki/spe010:Seieki/spe012r:Seieki/spe013r:Seieki/spe014r", 781, 809, 836, 847, 360, 330, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe005:Seieki/spe010:Seieki/spe012:Seieki/spe013:Seieki/spe014", 739, 767, 828, 839, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014r", 733, 769, 778, 817, 0, 30, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe007:Seieki/spe013:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015:Seieki/spe015", 766, 792, 760, 768, 0, 30, 0.4f, 0.4f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 255, 291, 778, 817, 330, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014r", 771, 806, 778, 823, 0, 30, 0.5f, 0.5f),
-        };
-
-        private static readonly List<SeiekiInfo> HaraMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("body", 0, 18, "Seieki/spe004:Seieki/spe004r:Seieki/spe005:Seieki/spe005r:Seieki/spe010:Seieki/spe010r:Seieki/spe012:Seieki/spe012r:Seieki/spe013:Seieki/spe013r", 466, 558, 712, 774, 350, 370, 1.0f, 1.0f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014", 458, 489, 735, 801, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014", 412, 441, 722, 774, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014", 455, 482, 663, 705, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe002:Seieki/spe002r:Seieki/spe007:Seieki/spe007r:Seieki/spe013:Seieki/spe013r", 466, 558, 808, 821, 350, 370, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 535, 566, 735, 801, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 583, 612, 722, 774, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 542, 569, 663, 705, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe001r:Seieki/spe002:Seieki/spe002r:Seieki/spe007:Seieki/spe007r:Seieki/spe008:Seieki/spe008r:Seieki/spe009:Seieki/spe009r:Seieki/spe011:Seieki/spe011r:Seieki/spe014:Seieki/spe014r", 501, 523, 655, 694, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe014", 472, 494, 609, 648, 350, 370, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe014r", 530, 552, 609, 648, 350, 370, 0.7f, 0.7f),
-        };
-
-        private static readonly List<SeiekiInfo> HutomomoMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe009:Seieki/spe014", 97, 110, 73, 124, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe013:Seieki/spe014", 117, 130, 68, 119, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe013r:Seieki/spe014r", 137, 150, 68, 119, 350, 370, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe013r:Seieki/spe014r", 159, 172, 75, 126, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe009r:Seieki/spe014r", 179, 192, 65, 116, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe009:Seieki/spe014", 114, 127, 127, 178, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 137, 150, 136, 187, 355, 360, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe013r:Seieki/spe014r", 157, 170, 134, 182, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe009:Seieki/spe014", 121, 134, 184, 235, 10, 25, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 148, 161, 190, 241, 10, 20, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe013r:Seieki/spe014r", 173, 186, 178, 229, 10, 20, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe009:Seieki/spe014", 134, 147, 249, 287, 350, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 163, 176, 249, 287, 10, 20, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe009r:Seieki/spe014r", 190, 201, 129, 170, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 230, 243, 44, 95, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe014", 258, 277, 34, 74, 340, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe014", 255, 268, 80, 122, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe007:Seieki/spe008:Seieki/spe014", 267, 280, 125, 152, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 239, 248, 113, 142, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe008:Seieki/spe009:Seieki/spe014", 253, 261, 151, 181, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 225, 231, 125, 147, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe008:Seieki/spe014", 266, 285, 175, 213, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe007:Seieki/spe008:Seieki/spe014", 246, 259, 211, 247, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe007:Seieki/spe008:Seieki/spe014", 22, 29, 66, 122, 340, 360, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe009r:Seieki/spe014r", 914, 927, 73, 124, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe011r:Seieki/spe013r:Seieki/spe014r", 894, 907, 68, 119, 0, 10, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe013r:Seieki/spe014", 874, 887, 68, 119, 350, 370, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe013:Seieki/spe014", 852, 865, 75, 126, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe009:Seieki/spe014", 832, 845, 65, 116, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe009r:Seieki/spe014r", 897, 910, 127, 178, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 874, 887, 136, 187, 0, 5, 0.7f, 0.7f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe013:Seieki/spe014", 854, 867, 134, 182, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe009r:Seieki/spe014r", 890, 903, 184, 235, 335, 350, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe006r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 863, 876, 190, 241, 340, 350, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe011:Seieki/spe013:Seieki/spe014", 838, 851, 178, 229, 340, 350, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe009r:Seieki/spe014r", 877, 890, 249, 287, 0, 10, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe006:Seieki/spe007:Seieki/spe008:Seieki/spe009:Seieki/spe014", 848, 861, 249, 287, 340, 350, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe003:Seieki/spe007:Seieki/spe009:Seieki/spe014", 823, 834, 129, 170, 350, 360, 0.6f, 0.6f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 781, 794, 44, 95, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe014r", 747, 766, 34, 74, 0, 20, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe014r", 756, 769, 80, 122, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe007r:Seieki/spe008r:Seieki/spe014r", 744, 757, 125, 152, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 776, 785, 113, 142, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 763, 771, 151, 181, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe003r:Seieki/spe007r:Seieki/spe008r:Seieki/spe009r:Seieki/spe014r", 793, 799, 125, 147, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe008r:Seieki/spe014r", 739, 785, 175, 213, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe007r:Seieki/spe008r:Seieki/spe014r", 765, 778, 211, 247, 350, 370, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe007r:Seieki/spe008r:Seieki/spe014r", 995, 1002, 66, 122, 0, 20, 0.5f, 0.5f),
-        };
-
-        private static readonly List<SeiekiInfo> HibuMarks = new List<SeiekiInfo>(){
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe002:Seieki/spe009:Seieki/spe014", 472, 497, 874, 921, 355, 365, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001r:Seieki/spe002r:Seieki/spe009r:Seieki/spe014r", 527, 552, 874, 921, 355, 365, 0.5f, 0.5f),
-            new SeiekiInfo("body", 0, 18, "Seieki/spe001:Seieki/spe001r:Seieki/spe002:Seieki/spe002r:Seieki/spe009:Seieki/spe009r:Seieki/spe014:Seieki/spe014r", 503, 520, 866, 906, 355, 365, 0.5f, 0.5f),
-        };
 
         private void EffectSeieki(int maidID, string marks)
-        {
-
-            int random;
-            SeiekiInfo info = null;
+        {            
+            SeiekiInfo info = SeiekiInfoSetup.Info(marks);
             Maid maid = stockMaids[maidID].mem;
-
-            switch (marks)
-            {
-                case "顔":
-                    random = UnityEngine.Random.Range(0, KaoMarks.Count);
-                    info = KaoMarks[random];
-                    break;
-
-                case "胸":
-                    random = UnityEngine.Random.Range(0, MuneMarks.Count);
-                    info = MuneMarks[random];
-                    break;
-
-                case "口元":
-                    random = UnityEngine.Random.Range(0, KuchimotoMarks.Count);
-                    info = KuchimotoMarks[random];
-                    break;
-
-                case "背中":
-                    random = UnityEngine.Random.Range(0, SenakaMarks.Count);
-                    info = SenakaMarks[random];
-                    break;
-
-                case "尻":
-                    random = UnityEngine.Random.Range(0, SiriMarks.Count);
-                    info = SiriMarks[random];
-                    break;
-
-                case "腹":
-                    random = UnityEngine.Random.Range(0, HaraMarks.Count);
-                    info = HaraMarks[random];
-                    break;
-
-                case "太股":
-                    random = UnityEngine.Random.Range(0, HutomomoMarks.Count);
-                    info = HutomomoMarks[random];
-                    break;
-
-                case "秘部":
-                    random = UnityEngine.Random.Range(0, HibuMarks.Count);
-                    info = HibuMarks[random];
-                    break;
-
-                default:
-                    return;
-            }
-
 
             int x = info.GetX();
             int y = info.GetY();
@@ -12439,6 +11538,7 @@ namespace CM3D2.VibeYourMaid.Plugin
         Vector2 YotogiScrollPos = Vector2.zero;
         Vector2 YotogiScrollPos2 = Vector2.zero;
         private bool smHidden = false;
+        private bool allMaid = false;
         private bool unzipSelect = false;
         private GUIStyleState styleYellow;
         private GUIStyleState styleWhite;
@@ -12480,7 +11580,8 @@ namespace CM3D2.VibeYourMaid.Plugin
                 cfgw.unzipGuiFlag = false;
             }
 
-            smHidden = GUI.Toggle(new Rect(400, 0, 170, 20), smHidden, "サブモーション非表示", gsToggle);
+            smHidden = GUI.Toggle(new Rect(410, 0, 170, 20), smHidden, "サブモーション非表示", gsToggle); //서브 모션 숨기기
+            allMaid = GUI.Toggle(new Rect(310, 0, 170, 20), allMaid, "All Maid", gsToggle); //서브 모션 숨기기
 
             int y = 1;
             int x = 5;
@@ -12533,9 +11634,6 @@ namespace CM3D2.VibeYourMaid.Plugin
             if (YotogiGroup.Count - 1 > YotogiMenu)
             {
 
-
-
-
                 y = 0;
                 x = 0;
                 if (YotogiMenu == 9 || YotogiMenu == 10)
@@ -12563,96 +11661,17 @@ namespace CM3D2.VibeYourMaid.Plugin
 
                     if (GUI.Button(new Rect(x, y * 22, w, 20), name, gsButton))
                     {
-
-                        //モーションアジャスト実行
-                        MotionAdjustDo(tgID, t, true, -1);
-
-                        //メイドのモーション変更
-                        if (maidsState[tgID].vStateMajor == 20)
-                        { //強度に合わせて変更
-                            t = t.Replace("_1_", "_2_");
-                        }
-                        else if (maidsState[tgID].vStateMajor == 30)
+                        if (allMaid)
                         {
-                            t = t.Replace("_1_", "_3_");
-                        }
-
-                        string inMotion = MotionCheckTokusyu(t, sInMaidMotion); //挿入モーションがあるかチェック
-                        if (inMotion == "Non" || maidsState[tgID].inMotion == inMotion)
-                        {
-                            MotionChange(maid, t + ".anm", true, 0.7f, 1f);
+                            foreach (var md in stockMaids)
+                            {
+                                motionSelect(md.mem, t, md.id);
+                            }
                         }
                         else
                         {
-                            MotionChange(maid, inMotion + ".anm", false, 0.7f, 1f);
-                            MotionChangeAf(maid, t + ".anm", true, 0.7f, 1f); // 終わったら再生する
+                            motionSelect(maid, t, tgID);
                         }
-
-                        if (maidsState[tgID].uDatsu == 2 && maj.hkupa1[maidsState[tgID].motionID] > 50f)
-                        {
-                            maidsState[tgID].uDatsuValue1 = 0f;
-                            maidsState[tgID].uDatsu = 0;
-                            try { VertexMorph_FromProcItem(maid.body0, "pussy_uterus_prolapse", 0f); } catch { /*LogError(ex);*/ }
-                        }
-
-                        if (maidsState[tgID].uDatsu == 3) maidsState[tgID].uDatsu = 0;
-
-                        maid.IKTargetToBone("左手", null, "無し", Vector3.zero, IKCtrlData.IKAttachType.Point, false, false, IKCtrlData.IKExecTiming.Normal);
-                        maid.IKTargetToBone("右手", null, "無し", Vector3.zero, IKCtrlData.IKAttachType.Point, false, false, IKCtrlData.IKExecTiming.Normal);
-
-                        //男の自動表示
-                        if (cfgw.autoManEnabled && !MansTgCheck(tgID) && MotionOldCheck(Regex.Replace(t, @"_f(|[0-9])", "_m")) != -1)
-                        {
-                            for (int im = 0; im < SubMans.Length; im++)
-                            {
-                                if (!SubMans[im]) SubMans[im] = GameMain.Instance.CharacterMgr.GetMan(im);
-                                if (SubMans[im].Visible) continue;
-                                StartCoroutine("MansVisible", im);
-                                maid.EyeToCamera((Maid.EyeMoveType)0, 0.8f);
-                                break;
-                            }
-                        }
-
-                        //男のモーション変更
-                        if (inMotion == "Non" || maidsState[tgID].inMotion == inMotion)
-                        {
-                            ManMotionChange(tgID, true, 0.7f, 1.0f);
-                        }
-                        else
-                        {
-                            ManMotionChange(inMotion + ".anm", tgID, false, 0.7f, 1f);
-                            ManMotionChangeAf(t + ".anm", tgID, true, 0.7f, 1f); // 終わったら再生する
-
-                        }
-
-                        //百合・ハーレム相手のモーション変更
-                        if (YotogiMenu == 8 || YotogiMenu == 9)
-                        {
-                            if (inMotion == "Non" || maidsState[tgID].inMotion == inMotion)
-                            {
-                                SubMotionChange(tgID, t + ".anm", true, true, 0.7f, 1f);
-                            }
-                            else
-                            {
-                                SubMotionChange(tgID, inMotion + ".anm", false, true, 0.7f, 1f);
-                                SubMotionChange(tgID, t + ".anm", true, false, 0.7f, 1f);
-                            }
-                        }
-
-                        //挿入モーションのバックアップを取得
-                        maidsState[tgID].inMotion = inMotion;
-
-                        //モーションセットリセット
-                        MotionSetClear(tgID);
-
-                        //いたずら開始フラグ
-                        if (lifeStart >= 5) maidsState[tgID].elItazuraFlag = true;
-
-                        //タイマーリセット
-                        maidsState[tgID].motionHoldTime = UnityEngine.Random.Range(200f, 600f);
-                        maidsState[tgID].voiceHoldTime = 0f;
-                        maidsState[tgID].faceHoldTime = 0f;
-                        maidsState[tgID].MouthHoldTime = 0f;
 
                     }
 
@@ -12695,24 +11714,18 @@ namespace CM3D2.VibeYourMaid.Plugin
                     string FileName = f.Replace("ems_", "").Replace(".xml", "");
                     if (GUI.Button(new Rect(x, y, w, 20), FileName, gsButton))
                     {
-                        MotionSetClear(tgID);
-                        MotionSetLoad(f, tgID);
-
-                        //男の自動表示 남자의 자동 표시
-                        if (cfgw.autoManEnabled && !MansTgCheck(tgID) && MotionOldCheck(Regex.Replace(maidsState[tgID].editMotionSet[0][0], @"_f(|[0-9])", "_m")) != -1)
+                        //motionSelect2(maid, f);
+                        if (allMaid)
                         {
-                            for (int im = 0; im < SubMans.Length; im++)
+                            foreach (var md in stockMaids)
                             {
-                                if (!SubMans[im]) SubMans[im] = GameMain.Instance.CharacterMgr.GetMan(im);
-                                if (SubMans[im].Visible) continue;
-                                StartCoroutine("MansVisible", im);
-                                maid.EyeToCamera((Maid.EyeMoveType)0, 0.8f);
-                                break;
+                                motionSelect2(md.mem, f, md.id);
                             }
                         }
-
-                        //いたずら開始フラグ 장난 시작 플래그
-                        if (lifeStart >= 5) maidsState[tgID].elItazuraFlag = true;
+                        else
+                        {
+                            motionSelect2(maid, f, tgID);
+                        }
                     }
 
                     x += w + 2;
@@ -12730,8 +11743,125 @@ namespace CM3D2.VibeYourMaid.Plugin
             GUI.DragWindow();
         }
 
+        private void motionSelect2(Maid maid, string f, int tgID)
+        {
+            if (maid == null) return;
 
+            MotionSetClear(tgID);
+            MotionSetLoad(f, tgID);
 
+            //男の自動表示 남자의 자동 표시
+            if (cfgw.autoManEnabled && !MansTgCheck(tgID) && MotionOldCheck(Regex.Replace(maidsState[tgID].editMotionSet[0][0], @"_f(|[0-9])", "_m")) != -1)
+            {
+                for (int im = 0; im < SubMans.Length; im++)
+                {
+                    if (!SubMans[im]) SubMans[im] = GameMain.Instance.CharacterMgr.GetMan(im);
+                    if (SubMans[im].Visible) continue;
+                    StartCoroutine("MansVisible", im);
+                    maid.EyeToCamera((Maid.EyeMoveType)0, 0.8f);
+                    break;
+                }
+            }
+
+            //いたずら開始フラグ 장난 시작 플래그
+            if (lifeStart >= 5) maidsState[tgID].elItazuraFlag = true;
+        }
+
+        private void motionSelect(Maid maid, string t,int tgID)
+        {
+            if (maid == null) return;
+
+            //モーションアジャスト実行
+            MotionAdjustDo(tgID, t, true, -1);
+
+            //メイドのモーション変更
+            if (maidsState[tgID].vStateMajor == 20)
+            { //強度に合わせて変更
+                t = t.Replace("_1_", "_2_");
+            }
+            else if (maidsState[tgID].vStateMajor == 30)
+            {
+                t = t.Replace("_1_", "_3_");
+            }
+
+            string inMotion = MotionCheckTokusyu(t, sInMaidMotion); //挿入モーションがあるかチェック
+            if (inMotion == "Non" || maidsState[tgID].inMotion == inMotion)
+            {
+                MotionChange(maid, t + ".anm", true, 0.7f, 1f);
+            }
+            else
+            {
+                MotionChange(maid, inMotion + ".anm", false, 0.7f, 1f);
+                MotionChangeAf(maid, t + ".anm", true, 0.7f, 1f); // 終わったら再生する
+            }
+
+            if (maidsState[tgID].uDatsu == 2 && maj.hkupa1[maidsState[tgID].motionID] > 50f)
+            {
+                maidsState[tgID].uDatsuValue1 = 0f;
+                maidsState[tgID].uDatsu = 0;
+                try { VertexMorph_FromProcItem(maid.body0, "pussy_uterus_prolapse", 0f); } catch { /*LogError(ex);*/ }
+            }
+
+            if (maidsState[tgID].uDatsu == 3) maidsState[tgID].uDatsu = 0;
+
+            maid.IKTargetToBone("左手", null, "無し", Vector3.zero, IKCtrlData.IKAttachType.Point, false, false, IKCtrlData.IKExecTiming.Normal);
+            maid.IKTargetToBone("右手", null, "無し", Vector3.zero, IKCtrlData.IKAttachType.Point, false, false, IKCtrlData.IKExecTiming.Normal);
+
+            //男の自動表示
+            if (cfgw.autoManEnabled && !MansTgCheck(tgID) && MotionOldCheck(Regex.Replace(t, @"_f(|[0-9])", "_m")) != -1)
+            {
+                for (int im = 0; im < SubMans.Length; im++)
+                {
+                    if (!SubMans[im]) SubMans[im] = GameMain.Instance.CharacterMgr.GetMan(im);
+                    if (SubMans[im].Visible) continue;
+                    StartCoroutine("MansVisible", im);
+                    maid.EyeToCamera((Maid.EyeMoveType)0, 0.8f);
+                    break;
+                }
+            }
+
+            //男のモーション変更
+            if (inMotion == "Non" || maidsState[tgID].inMotion == inMotion)
+            {
+                ManMotionChange(tgID, true, 0.7f, 1.0f);
+            }
+            else
+            {
+                ManMotionChange(inMotion + ".anm", tgID, false, 0.7f, 1f);
+                ManMotionChangeAf(t + ".anm", tgID, true, 0.7f, 1f); // 終わったら再生する
+
+            }
+
+            //百合・ハーレム相手のモーション変更
+            if (YotogiMenu == 8 || YotogiMenu == 9)
+            {
+                if (inMotion == "Non" || maidsState[tgID].inMotion == inMotion)
+                {
+                    SubMotionChange(tgID, t + ".anm", true, true, 0.7f, 1f);
+                }
+                else
+                {
+                    SubMotionChange(tgID, inMotion + ".anm", false, true, 0.7f, 1f);
+                    SubMotionChange(tgID, t + ".anm", true, false, 0.7f, 1f);
+                }
+            }
+
+            //挿入モーションのバックアップを取得
+            maidsState[tgID].inMotion = inMotion;
+
+            //モーションセットリセット
+            MotionSetClear(tgID);
+
+            //いたずら開始フラグ
+            if (lifeStart >= 5) maidsState[tgID].elItazuraFlag = true;
+
+            //タイマーリセット
+            maidsState[tgID].motionHoldTime = UnityEngine.Random.Range(200f, 600f);
+            maidsState[tgID].voiceHoldTime = 0f;
+            maidsState[tgID].faceHoldTime = 0f;
+            maidsState[tgID].MouthHoldTime = 0f;
+            //return t;
+        }
 
         void WindowCallback4a(int id)
         {
@@ -13352,14 +12482,14 @@ namespace CM3D2.VibeYourMaid.Plugin
         }
 
 
-        //新 エンパイアズライフ関係終了------------------------
+        //新 エンパイアズライフ関係終了------------------------새로운 엠파이어스 라이프 관계 종료
 
 
 
 
 
         //-------------------------------------------------
-        //エンパイアズライフ関係---------------------------
+        //エンパイアズライフ関係---------------------------엠파이어스 라이프 관계
 
         //エンパイアズライフ用変数
         private int bgID = 0;
